@@ -1,5 +1,6 @@
 import * as param from '@jkcfg/std/param'
 import * as std from '@jkcfg/std'
+import { print, Format } from '@jkcfg/std';
 
 const config = param.all();
 let output = [];
@@ -106,12 +107,12 @@ const sshPort = machine => machine.ports.find(p => p.guest == 22).host;
 
 if (config.machines !== undefined) {
   const machines = [];
-
+//  print(config.machines);
   for (let i = 0; i < config.controlPlane.nodes; i++ ) {
     const machine = config.machines[i];
     machines.push(Machine({
       id: i,
-      privateIP: machine.runtimeNetworks[0].ip,
+//      privateIP: machine.runtimeNetworks[0].ip,
       sshPort: sshPort(machine),
       role: 'master',
     }));
@@ -121,7 +122,7 @@ if (config.machines !== undefined) {
     const machine = config.machines[config.controlPlane.nodes + i];
     machines.push(Machine({
       id: i,
-      privateIP: machine.runtimeNetworks[0].ip,
+//      privateIP: machine.runtimeNetworks[0].ip,
       sshPort: sshPort(machine),
       role: 'worker',
     }));
